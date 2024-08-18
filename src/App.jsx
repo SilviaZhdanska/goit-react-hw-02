@@ -6,10 +6,11 @@ import Notification from "./components/notification/Notification";
 import "./App.css";
 
 export default function App() {
-  const [values, setValues] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
+  const [values, setValues] = useState(() => {
+    const savedValues = localStorage.getItem("feedbackValues");
+    return savedValues
+      ? JSON.parse(savedValues)
+      : { good: 0, neutral: 0, bad: 0 };
   });
 
   const updateFeedback = (feedbackType) => {
